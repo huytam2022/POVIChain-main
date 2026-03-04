@@ -1,0 +1,56 @@
+# PoVIChain Configuration
+# This file defines parameters for the simulation
+
+# Network Configuration
+network:
+  num_validators: 100
+  num_malicious: 10  # Vary this for RQ1.1: 10, 20, 25, 40
+  network_delay_ms: [100, 500]
+  packet_loss_rate: 0.0  # Vary for RQ2.3: 0.0, 0.05, 0.10, 0.20
+  partition_duration: 0  # Vary for RQ1.2: 10, 12, 14, 16, 18, 20
+
+# VRF Parameters
+vrf:
+  threshold: 0.10  # Expected committee size ≈ θ|V|
+  min_reputation: 0.10
+
+# Reputation Parameters (from paper Section 6.2.5)
+reputation:
+  eta: 0.05      # Decay factor
+  alpha: 0.70    # Participation weight
+  beta: 0.15     # Verification accuracy weight
+  gamma: 0.10    # Reward weight
+  lambda_penalty: 0.05  # Penalty weight
+  delta: 0.25    # Stake vs behavior balance
+
+# Consensus Parameters
+consensus:
+  epoch_duration_ms: 1000
+  block_size: 8192
+  warmup_epochs: 100
+  total_epochs: 500
+
+# Smart Zones
+zones:
+  types: ["identity", "housing", "traffic", "energy", "finance", "governance", "environment"]
+  max_queue_size: 10000
+  base_fee: 100
+  per_byte_fee: 1
+
+# ZKP Configuration (STUBBED - see verification/stub_prover.py)
+zkp:
+  system: "groth16"  # or "stark"
+  # Proving times are calibrated from hardware measurements
+  groth16_proving_time_ms: 15000  # Raspberry Pi 4
+  stark_proving_time_ms: 50000    # Raspberry Pi 4
+  verification_time_ms: 50        # ESP32
+
+# Experiment Configuration
+experiment:
+  mode: "B"  # A = no proving delay, B = with calibrated delays
+  load_factor: 1.0  # Vary for RQ2: 1.0, 2.0, 3.0, 4.0, 5.0
+  
+# Output Configuration
+output:
+  format: "markdown"  # markdown, json, csv
+  save_path: "./outputs"
