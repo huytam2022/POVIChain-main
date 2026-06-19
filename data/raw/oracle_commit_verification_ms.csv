@@ -1,0 +1,17 @@
+sample_index,latency_ms,regime
+0,95.0,cold_dest_block_miss
+1,88.0,cold_dest_block_miss
+2,72.0,warm
+3,68.0,warm
+4,66.0,warm
+5,69.0,warm
+6,65.0,warm
+7,67.0,warm
+8,66.0,warm
+9,68.0,warm
+10,82.0,tail_block_bundle_wait
+11,74.0,tail
+12,67.0,return
+13,66.0,return
+14,68.0,return
+15,66.0,return

@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProcessedCalibration",
+  "type": "object",
+  "required": ["version", "source_manifest", "device_profiles", "calibration_policy"],
+  "properties": {
+    "version": {"type": "integer", "minimum": 1},
+    "source_manifest": {
+      "type": "object",
+      "required": ["raw_files", "generated_at", "generated_by"],
+      "properties": {
+        "raw_files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["path"],
+            "properties": {"path": {"type": "string"}}
+          }
+        },
+        "generated_at": {"type": "string"},
+        "generated_by": {"type": "string"}
+      }
+    },
+    "device_profiles": {
+      "type": "object",
+      "properties": {
+        "raspberry_pi_4": {
+          "type": "object",
+          "properties": {
+            "groth16": {"$ref": "#/$defs/prover_block"},
+            "stark": {"$ref": "#/$defs/prover_block"}
+          }
+        },
+        "esp32_s3": {
+          "type": "object",
+          "properties": {
+            "merkle_verify_latency_ms": {"$ref": "#/$defs/series_with_stats"},
+            "ram_profile_kb": {
+              "type": "object",
+              "required": [
+                "resident_baseline",
+                "proof_reception_peak",
+                "verification_peak",
+                "post_update_return"
+              ],
+              "properties": {
+                "resident_baseline": {"type": "number"},
+                "proof_reception_peak": {"type": "number"},
+                "verification_peak": {"type": "number"},
+                "post_update_return": {"type": "number"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "calibration_policy": {
+      "type": "object",
+      "required": [
+        "replay_mode",
+        "interpolation"
+      ],
+      "properties": {
+        "replay_mode": {
+          "type": "string",
+          "enum": [
+            "exact_cycle",
+            "exact_once",
+            "median_fixed",
+            "envelope_fixed"
+          ]
+        },
+        "interpolation": {"type": "string", "enum": ["disabled", "piecewise"]}
+      }
+    },
+    "energy_coefficients": {
+      "type": "object",
+      "properties": {
+        "k_cpu_nj_per_1k_cycles": {"type": "number"},
+        "k_net_uj_per_kb": {"type": "number"}
+      }
+    },
+    "proof_stack": {
+      "type": "object",
+      "properties": {
+        "curve": {"type": "string"},
+        "hash": {"type": "string"},
+        "r1cs_constraints": {"type": "integer"},
+        "stack": {"type": "string"}
+      }
+    }
+  },
+  "$defs": {
+    "series_with_stats": {
+      "type": "object",
+      "required": ["deterministic_series"],
+      "properties": {
+        "deterministic_series": {
+          "type": "array",
+          "items": {"type": "number"},
+          "minItems": 1
+        },
+        "median": {"type": "number"},
+        "ci95_low": {"type": "number"},
+        "ci95_high": {"type": "number"}
+      }
+    },
+    "prover_block": {
+      "type": "object",
+      "required": [
+        "proving_latency_seconds",
+        "cpu_utilization_percent",
+        "resident_memory_mb"
+      ],
+      "properties": {
+        "proving_latency_seconds": {"$ref": "#/$defs/series_with_stats"},
+        "cpu_utilization_percent": {"$ref": "#/$defs/series_with_stats"},
+        "resident_memory_mb": {"$ref": "#/$defs/series_with_stats"}
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "device_class": "raspberry_pi_4",
+    "measurement_type": "proving_latency",
+    "proof_backend": "groth16",
+    "circuit_profile": {
+      "family": "arkworks_bn254_poseidon",
+      "r1cs_constraints": 18500,
+      "transcript": "blake2s"
+    },
+    "run_id": "placeholder-run-1",
+    "warmup_index": 0,
+    "sample_index": 0,
+    "value": 15.0,
+    "unit": "s",
+    "timestamp_utc": "1970-01-01T00:00:00Z",
+    "firmware_or_os": "raspbian-placeholder",
+    "notes": "placeholder-not-empirical"
+  }
+]

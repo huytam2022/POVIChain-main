@@ -1,0 +1,33 @@
+experiment_id: network_partitions
+scenario: network_partitions
+node_count: 100
+partition_durations_rounds:
+  - 10
+  - 15
+  - 20
+mode: A
+warmup_rounds: 5
+recovery_rounds_budget: 40
+committee_threshold_theta: 25.0
+reputation_weights:
+  alpha: 0.7
+  beta: 0.15
+  gamma: 0.10
+  lambda: 0.20
+  delta: 0.25
+  eta: 0.02
+  mu: 0.10
+  r_min: 0.05
+partition_profile:
+  enabled: true
+  model: hard_isolation
+  split_ratio: 0.5
+  reconnect_after_rounds: true
+  post_reconnect_agreement_window: 3
+  tie_margin: 0.005
+output:
+  save_raw_metrics: true
+  save_aggregated_metrics: true
+  save_plot: true
+  figure_name: figure5b
+  output_dir: outputs/network_partitions

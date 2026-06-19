@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExperimentManifest",
+  "type": "object",
+  "required": [
+    "experiment_id",
+    "mode",
+    "validator_count",
+    "tx_per_block",
+    "proof_backend",
+    "committee_threshold_theta",
+    "reputation_weights",
+    "network_profile",
+    "device_profile_file",
+    "routing_profile",
+    "energy_profile",
+    "workload_profile"
+  ],
+  "properties": {
+    "experiment_id": {"type": "string"},
+    "mode": {"type": "string", "enum": ["A", "B"]},
+    "validator_count": {"type": "integer", "minimum": 1},
+    "tx_per_block": {"type": "integer", "minimum": 1},
+    "proof_backend": {"type": "string", "enum": ["groth16", "stark", "none"]},
+    "committee_threshold_theta": {"type": "number", "exclusiveMinimum": 0},
+    "reputation_weights": {
+      "type": "object",
+      "required": ["alpha", "beta", "gamma", "lambda", "delta"],
+      "properties": {
+        "alpha": {"type": "number"},
+        "beta": {"type": "number"},
+        "gamma": {"type": "number"},
+        "lambda": {"type": "number"},
+        "delta": {"type": "number"},
+        "eta": {"type": "number"},
+        "mu": {"type": "number"},
+        "r_min": {"type": "number"}
+      }
+    },
+    "network_profile": {"type": "string"},
+    "device_profile_file": {"type": "string"},
+    "routing_profile": {"type": "string"},
+    "energy_profile": {"type": "string"},
+    "workload_profile": {"type": "string"},
+    "malicious_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+    "blocks_to_run": {"type": "integer", "minimum": 1}
+  }
+}

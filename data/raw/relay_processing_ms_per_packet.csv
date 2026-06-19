@@ -1,0 +1,17 @@
+sample_index,latency_ms,regime
+0,0.62,cold_marshal_init
+1,0.55,cold
+2,0.45,warm
+3,0.48,warm
+4,0.44,warm
+5,0.47,warm
+6,0.46,warm
+7,0.48,warm
+8,0.45,warm
+9,0.47,warm
+10,0.46,warm
+11,0.52,tail_grpc
+12,0.49,tail
+13,0.46,return
+14,0.47,return
+15,0.45,return

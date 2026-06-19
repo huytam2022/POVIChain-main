@@ -1,0 +1,25 @@
+experiment_id: gateway_profile
+scenario: gateway_resource_and_prover_cost
+device_class: raspberry_pi_4
+
+training_epochs: 10
+
+resource_profile:
+  cpu_base_pct: 37.0
+  cpu_slope_pct_per_epoch: 1.45
+  cpu_jitter_pct: 0.7
+  mem_base_mb: 188.0
+  mem_slope_mb_per_epoch: 8.0
+  mem_jitter_mb: 2.5
+
+prover_timing:
+  groth16_base_s: 12.0
+  groth16_slope_s_per_epoch: 0.67
+  groth16_jitter_s: 0.3
+  stark_base_s: 52.0
+  stark_slope_s_per_epoch: 0.72
+  stark_jitter_s: 0.3
+
+
+output:
+  output_dir: outputs/gateway_profile

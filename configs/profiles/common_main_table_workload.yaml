@@ -1,0 +1,24 @@
+name: common_main_table_workload
+zone_weights:
+  - zone_id: energy
+    weight: 2
+  - zone_id: environment
+    weight: 2
+  - zone_id: finance
+    weight: 1
+  - zone_id: governance
+    weight: 1
+  - zone_id: identity
+    weight: 1
+  - zone_id: traffic
+    weight: 1
+payload_sizes_bytes:
+  - 256
+  - 384
+  - 512
+  - 640
+  - 768
+  - 896
+  - 1024
+tx_arrival_interval_us: 4100
+senders: 128

@@ -1,0 +1,52 @@
+version: 1
+source_manifest:
+  raw_files:
+    - path: data/placeholders/raw/pi4_groth16.placeholder.json
+    - path: data/placeholders/raw/pi4_stark.placeholder.json
+    - path: data/placeholders/raw/esp32_verify.placeholder.json
+  generated_at: "1970-01-01T00:00:00Z"
+  generated_by: "placeholder-not-empirical"
+device_profiles:
+  raspberry_pi_4:
+    groth16:
+      proving_latency_seconds:
+        deterministic_series: [12.0, 13.0, 13.5, 14.0, 15.0, 15.5, 16.0, 17.0, 17.5, 18.0]
+        median: 15.0
+        ci95_low: 10.0
+        ci95_high: 20.0
+      cpu_utilization_percent:
+        deterministic_series: [37, 38, 41, 42, 41, 43, 44, 47, 49, 50]
+      resident_memory_mb:
+        deterministic_series: [188, 190, 200, 210, 214, 230, 240, 245, 248, 260]
+    stark:
+      proving_latency_seconds:
+        deterministic_series: [52, 53, 54, 55, 56, 57, 58, 59]
+        median: 55.5
+        ci95_low: 52.0
+        ci95_high: 59.0
+      cpu_utilization_percent:
+        deterministic_series: [45, 46, 47, 48, 49, 50, 51, 52]
+      resident_memory_mb:
+        deterministic_series: [210, 220, 230, 240, 250, 255, 258, 265]
+  esp32_s3:
+    merkle_verify_latency_ms:
+      deterministic_series: [50, 75, 100, 125, 150, 175, 200]
+      median: 125
+    ram_profile_kb:
+      resident_baseline: 100
+      proof_reception_peak: 130
+      verification_peak: 250
+      post_update_return: 110
+calibration_policy:
+  replay_mode: exact_cycle
+  interpolation: disabled
+  randomization: disabled
+  gaussian_noise: disabled
+energy_coefficients:
+  k_cpu_nj_per_1k_cycles: 52
+  k_net_uj_per_kb: 1.6
+proof_stack:
+  curve: bn254
+  hash: poseidon
+  r1cs_constraints: 18500
+  stack: arkworks

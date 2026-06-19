@@ -1,0 +1,15 @@
+name: devices_default
+proof_stack:
+  curve: bn254
+  hash: poseidon
+  r1cs_constraints: 18500
+  stack: arkworks
+energy:
+  k_cpu_nj_per_1k_cycles: 52
+  k_net_uj_per_kb: 1.6
+raspberry_pi_4:
+  role: gateway
+  proving: true
+esp32_s3:
+  role: mcu_verifier
+  verify_only: true

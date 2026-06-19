@@ -1,0 +1,33 @@
+experiment_id: security_ecoc_sensitivity
+scenario: ecoc_sensitivity_surface
+
+ecoc_reference:
+  base_tvs: 0.4544
+  default_rho: 0.25
+  default_lambda: 0.20
+  default_eta: 0.05
+  default_delta: 0.25
+
+ecoc_model:
+  alpha_rho: 1.0
+  alpha_lambda: 0.5
+  alpha_eta: 0.5
+
+sweep:
+  rho_min: 0.0
+  rho_max: 1.0
+  rho_steps: 26
+  lambda_min: 0.0
+  lambda_max: 6.0
+  lambda_steps: 31
+  eta_fixed: 0.05
+
+deterrence:
+  rho_lambda_threshold: 0.05
+
+reference:
+  ecoc_pos_tvs: 0.51
+
+
+output:
+  output_dir: outputs/security_ecoc_sensitivity

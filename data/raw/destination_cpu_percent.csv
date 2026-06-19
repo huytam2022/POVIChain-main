@@ -1,0 +1,16 @@
+sample_index,cpu_percent,regime
+0,65.0,ramp
+1,68.0,ramp
+2,72.0,ramp
+3,75.0,ramp
+4,77.0,plateau
+5,78.0,plateau
+6,79.0,plateau
+7,80.0,plateau
+8,81.0,plateau
+9,80.0,plateau
+10,79.0,plateau
+11,79.0,plateau
+12,78.0,decay
+13,78.0,decay
+14,77.0,decay

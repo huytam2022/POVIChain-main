@@ -1,0 +1,22 @@
+experiment_id: mode_a_baseline
+mode: A
+validator_count: 500
+tx_per_block: 8192
+proof_backend: none
+committee_threshold_theta: 0.10
+reputation_weights:
+  alpha: 0.7
+  beta: 0.15
+  gamma: 0.10
+  lambda: 0.05
+  delta: 0.25
+  eta: 0.02
+  mu: 0.10
+  r_min: 0.05
+network_profile: network_delay_standard
+device_profile_file: data/processed/device_profiles.processed.yaml
+routing_profile: smart_zones_default
+energy_profile: protocol_energy_default
+workload_profile: multidomain_default
+malicious_fraction: 0.0
+blocks_to_run: 20

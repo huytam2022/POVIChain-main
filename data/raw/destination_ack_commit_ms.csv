@@ -1,0 +1,17 @@
+sample_index,latency_ms,regime
+0,0.38,cold
+1,0.35,cold
+2,0.26,warm
+3,0.28,warm
+4,0.27,warm
+5,0.29,warm
+6,0.26,warm
+7,0.28,warm
+8,0.27,warm
+9,0.29,warm
+10,0.32,tail_iavl_grow
+11,0.30,tail
+12,0.27,return
+13,0.28,return
+14,0.26,return
+15,0.29,return

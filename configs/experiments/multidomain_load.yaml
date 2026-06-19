@@ -1,0 +1,36 @@
+experiment_id: multidomain_load
+scenario: cross_domain_throughput_vs_load
+
+load_levels: [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0]
+
+domains:
+  - name: traffic
+    base_demand_tps: 2500.0
+    capacity_tps: 2500.0
+    knee_load: 2.0
+    decay_per_load_unit_tps: 400.0
+    jitter_tps: 60.0
+
+  - name: energy
+    base_demand_tps: 2300.0
+    capacity_tps: 3000.0
+    knee_load: 5.0
+    decay_per_load_unit_tps: 0.0
+    jitter_tps: 50.0
+
+  - name: environment
+    base_demand_tps: 2250.0
+    capacity_tps: 3000.0
+    knee_load: 5.0
+    decay_per_load_unit_tps: 0.0
+    jitter_tps: 50.0
+
+dispatcher_efficiency:
+  eta_at_unit_load: 0.95
+  decay_per_load_unit: 0.04
+  floor: 0.78
+  jitter: 0.012
+
+
+output:
+  output_dir: outputs/multidomain_load

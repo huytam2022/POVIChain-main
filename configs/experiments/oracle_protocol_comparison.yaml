@@ -1,0 +1,14 @@
+experiment_id: oracle_protocol_comparison
+baseline: oracle_protocol
+validators: 500
+tx_per_block: 75
+mode: B
+proof_backend: none
+network_profile: common_fair_emulation
+device_profile: common_calibration_bundle
+workload_profile: common_main_table_workload
+protocol_profile: oracle_protocol
+blocks_to_run: 32
+dvn_quorum:
+  total_verifiers: 3
+  required: 2

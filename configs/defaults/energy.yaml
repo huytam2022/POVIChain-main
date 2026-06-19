@@ -1,0 +1,5 @@
+name: protocol_energy_default
+k_cpu_nj_per_1k_cycles: 52
+k_net_uj_per_kb: 1.6
+baseline_mcu_mj_per_verify: 0.02
+baseline_gateway_mj_per_proof: 0.08

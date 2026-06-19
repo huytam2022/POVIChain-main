@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RawDeviceMeasurement",
+  "type": "object",
+  "required": [
+    "device_class",
+    "measurement_type",
+    "proof_backend",
+    "circuit_profile",
+    "run_id",
+    "warmup_index",
+    "sample_index",
+    "value",
+    "unit",
+    "timestamp_utc",
+    "firmware_or_os"
+  ],
+  "properties": {
+    "device_class": {"type": "string", "enum": ["raspberry_pi_4", "esp32_s3"]},
+    "measurement_type": {
+      "type": "string",
+      "enum": [
+        "proving_latency",
+        "verifier_latency",
+        "verifier_memory",
+        "cpu_utilization",
+        "memory_resident"
+      ]
+    },
+    "proof_backend": {"type": "string", "enum": ["groth16", "stark", "none"]},
+    "circuit_profile": {
+      "type": "object",
+      "required": ["family", "r1cs_constraints", "transcript"],
+      "properties": {
+        "family": {"type": "string"},
+        "r1cs_constraints": {"type": "integer", "minimum": 1},
+        "transcript": {"type": "string", "enum": ["blake2s", "keccak", "none"]}
+      }
+    },
+    "run_id": {"type": "string"},
+    "warmup_index": {"type": "integer", "minimum": 0},
+    "sample_index": {"type": "integer", "minimum": 0},
+    "value": {"type": "number"},
+    "unit": {"type": "string", "enum": ["ms", "s", "kb", "mb", "percent"]},
+    "timestamp_utc": {"type": "string"},
+    "firmware_or_os": {"type": "string"},
+    "notes": {"type": "string"}
+  }
+}

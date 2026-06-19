@@ -1,0 +1,32 @@
+name: smart_zones_default
+zones:
+  - zone_id: identity
+    base_fee: 1.0
+    validator_share: 0.6
+    protocol_share: 0.3
+    treasury_share: 0.1
+  - zone_id: finance
+    base_fee: 1.5
+    validator_share: 0.6
+    protocol_share: 0.3
+    treasury_share: 0.1
+  - zone_id: traffic
+    base_fee: 0.8
+    validator_share: 0.6
+    protocol_share: 0.3
+    treasury_share: 0.1
+  - zone_id: energy
+    base_fee: 0.8
+    validator_share: 0.6
+    protocol_share: 0.3
+    treasury_share: 0.1
+  - zone_id: environment
+    base_fee: 0.8
+    validator_share: 0.6
+    protocol_share: 0.3
+    treasury_share: 0.1
+  - zone_id: governance
+    base_fee: 1.2
+    validator_share: 0.6
+    protocol_share: 0.3
+    treasury_share: 0.1

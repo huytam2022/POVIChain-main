@@ -1,0 +1,11 @@
+name: oracle_network
+description: "Oracle protocol network overlay for fair emulation with PoVIChain."
+delay_series_ms:
+  - 40.0
+  - 44.0
+  - 48.0
+  - 52.0
+  - 56.0
+replay_mode: exact_cycle
+bandwidth_mbps: 100
+dvn_dispatch_overhead_hint_ms: 20

@@ -1,0 +1,11 @@
+name: relay_network
+description: "Relay protocol network overlay for fair emulation with PoVIChain."
+delay_series_ms:
+  - 42.0
+  - 46.0
+  - 50.0
+  - 54.0
+  - 58.0
+replay_mode: exact_cycle
+bandwidth_mbps: 100
+relayer_rpc_overhead_hint_ms: 30

@@ -1,0 +1,10 @@
+name: common_fair_emulation
+description: "Common network preset shared across all protocol comparison experiments."
+delay_series_ms:
+  - 38.0
+  - 42.0
+  - 46.0
+  - 50.0
+  - 54.0
+replay_mode: exact_cycle
+bandwidth_mbps: 100

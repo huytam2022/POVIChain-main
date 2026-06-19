@@ -1,0 +1,17 @@
+sample_index,latency_ms,regime
+0,0.52,cold
+1,0.48,cold
+2,0.36,warm
+3,0.38,warm
+4,0.35,warm
+5,0.37,warm
+6,0.36,warm
+7,0.38,warm
+8,0.37,warm
+9,0.36,warm
+10,0.42,tail_mempool
+11,0.40,tail
+12,0.36,return
+13,0.37,return
+14,0.38,return
+15,0.35,return

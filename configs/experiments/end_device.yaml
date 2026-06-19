@@ -1,0 +1,38 @@
+experiment_id: end_device
+scenario: end_device_and_system_level
+
+esp32_ram_cycle:
+  duration_ms: 500
+  sample_interval_ms: 1
+  device_ram_limit_kb: 520
+  idle_baseline_kb: 100.0
+  jitter_kb: 1.5
+  peaks:
+    - {label: "Proof Reception", center_ms: 125, height_kb: 35.0, width_ms: 18.0}
+    - {label: "Verification",    center_ms: 210, height_kb: 155.0, width_ms: 32.0}
+    - {label: "State Update",    center_ms: 330, height_kb: 35.0, width_ms: 18.0}
+
+energy_per_tx:
+  protocols:
+    - protocol: "Cosmos IBC"
+      crypto_verify_mj: 1.4
+      hash_check_mj: 0.6
+      state_update_mj: 1.6
+      network_io_mj: 0.4
+      idle_baseline_mj: 4.5
+    - protocol: "LayerZero Solutions"
+      crypto_verify_mj: 1.0
+      hash_check_mj: 0.7
+      state_update_mj: 1.4
+      network_io_mj: 0.4
+      idle_baseline_mj: 4.3
+    - protocol: "Đề xuất (Ours)"
+      crypto_verify_mj: 0.7
+      hash_check_mj: 0.4
+      state_update_mj: 1.0
+      network_io_mj: 0.3
+      idle_baseline_mj: 4.8
+
+
+output:
+  output_dir: outputs/end_device

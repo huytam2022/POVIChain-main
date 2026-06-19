@@ -1,0 +1,10 @@
+experiment_id: relay_protocol_comparison
+baseline: relay_protocol
+validators: 500
+tx_per_block: 75
+mode: B
+network_profile: common_fair_emulation
+device_profile: common_calibration_bundle
+workload_profile: common_main_table_workload
+protocol_profile: relay_protocol
+blocks_to_run: 32

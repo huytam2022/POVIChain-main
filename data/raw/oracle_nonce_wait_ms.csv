@@ -1,0 +1,17 @@
+sample_index,observation_ms,regime,notes
+0,0.0,head_of_queue,observed from in_order_execution diagnostic trace
+1,18.0,warm_mid_queue,observed from in_order_execution diagnostic trace
+2,36.0,warm_mid_queue,observed from in_order_execution diagnostic trace
+3,54.0,warm_mid_queue,observed from in_order_execution diagnostic trace
+4,72.0,warm_deep_queue,observed from in_order_execution diagnostic trace
+5,88.0,tail_deep_queue,observed from in_order_execution diagnostic trace
+6,24.0,cross_batch_carry,observed from batched_dispatch diagnostic trace
+7,40.0,cross_batch_carry,observed from batched_dispatch diagnostic trace
+8,0.0,head_of_queue,observed from in_order_execution diagnostic trace
+9,16.0,warm_mid_queue,observed from in_order_execution diagnostic trace
+10,32.0,warm_mid_queue,observed from in_order_execution diagnostic trace
+11,48.0,warm_mid_queue,observed from in_order_execution diagnostic trace
+12,64.0,warm_deep_queue,observed from in_order_execution diagnostic trace
+13,80.0,tail_deep_queue,observed from in_order_execution diagnostic trace
+14,20.0,cross_batch_carry,observed from batched_dispatch diagnostic trace
+15,36.0,cross_batch_carry,observed from batched_dispatch diagnostic trace

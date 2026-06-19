@@ -1,0 +1,20 @@
+experiment_id: recovery_overhead
+scenario: partition_recovery_backlog_orphan
+
+partition_durations: [5, 10, 15, 20]
+
+replicates: 12
+
+backlog_model:
+  arrival_per_round: 240.0
+  base_offset_tx: 50.0
+  jitter_tx: 120.0
+
+orphan_model:
+  slope_pct_per_round: 0.275
+  base_offset_pct: 0.10
+  jitter_pct: 0.30
+
+
+output:
+  output_dir: outputs/recovery_overhead

@@ -1,0 +1,16 @@
+sample_index,latency_ms,regime
+0,15.0,cold_config_reload
+1,14.0,cold
+2,10.0,warm
+3,11.0,warm
+4,10.0,warm
+5,12.0,warm
+6,10.0,warm
+7,11.0,warm
+8,10.0,warm
+9,12.0,warm
+10,11.0,warm
+11,14.0,tail
+12,11.0,return
+13,10.0,return
+14,12.0,return

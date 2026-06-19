@@ -1,0 +1,49 @@
+# Claude AI files
+.claude/
+Claude/
+
+# Binary / archive artifacts
+*.pdf
+*.zip
+
+# Experiment outputs
+out/
+outputs/
+
+# Processed data bundles
+data/processed/
+
+# Debug artifacts
+_debug_stage.svg
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.swp
+~$*
+
+# Tài liệu trình bày / bản thảo (không công khai trong repo code)
+_paper.txt
+_slidedump.txt
+_tamdump.txt
+_thesisdump.txt
+*.pptx
+Script thuyet trinh.md
+build_slides.py
+build_slides_v2.py
+add_notes.py
+demo_video/
+
+# Nguồn LaTeX khóa luận (giữ riêng, không đẩy lên repo code)
+KLTN_filled/
+kltn_thesis/
+
+# Công cụ build cục bộ
+tooling/tectonic.exe
+tooling/arch.tex

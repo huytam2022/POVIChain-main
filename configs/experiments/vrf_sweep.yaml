@@ -1,0 +1,21 @@
+experiment_id: vrf_threshold_sweep
+scenario: vrf_threshold_safety_sensitivity
+
+validator_count: 500
+
+committee_sizes:
+  kappa_min: 1
+  kappa_max: 100
+  step: 1
+
+adversarial_fractions: [0.10, 0.20, 0.25, 0.33]
+
+tail_probability_floor: 1.0e-6
+
+reference_kappa_marker: 32
+
+show_theta_axis: true
+
+
+output:
+  output_dir: outputs/vrf_sweep

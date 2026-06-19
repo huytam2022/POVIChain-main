@@ -1,0 +1,10 @@
+component,metric,value,unit,basis
+raspberry_pi_4_bcm2711,tdp,5000.0,mW,datasheet_load
+raspberry_pi_4_bcm2711,core_count,4,cores,cortex_a72
+raspberry_pi_4_bcm2711,clock_hz,1500000000,Hz,nominal
+raspberry_pi_4_bcm2711,energy_per_ms_cpu_busy_nJ,3750000.0,nJ,tdp_times_utilisation
+esp32_s3,tdp,240.0,mW,datasheet
+esp32_s3,energy_per_ms_cpu_busy_nJ,180000.0,nJ,tdp_times_utilisation
+short_haul_ethernet,wire_energy_per_kb,0.30,mJ,observed_1GbE
+ics23_merkle_verify_per_proof_mJ,micro,0.0005,mJ,sha256_depth15
+tendermint_header_update_per_update_mJ,micro,2.0,mJ,header_3.2KB_RTT_plus_ed25519_batch100_plus_validator_set_merkle

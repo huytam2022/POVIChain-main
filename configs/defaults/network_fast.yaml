@@ -1,0 +1,5 @@
+name: network_fast
+description: "Deterministic fast network preset — 50ms mean delay for epoch-level stress simulation"
+delay_series_ms: [40, 45, 50, 55, 60, 50, 45, 40, 55, 60]
+replay_mode: exact_cycle
+bandwidth_mbps: 1000

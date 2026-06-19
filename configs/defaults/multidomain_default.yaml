@@ -1,0 +1,17 @@
+name: multidomain_default
+zone_weights:
+  - zone_id: identity
+    weight: 2
+  - zone_id: finance
+    weight: 3
+  - zone_id: traffic
+    weight: 2
+  - zone_id: energy
+    weight: 1
+  - zone_id: environment
+    weight: 1
+  - zone_id: governance
+    weight: 1
+payload_sizes_bytes: [256, 384, 512, 640, 768, 896, 1024]
+tx_arrival_interval_us: 500
+senders: 128

@@ -1,0 +1,238 @@
+name: oracle_protocol
+calibration_source: data/processed/oracle_protocol_calibration.processed.yaml
+replay_mode: exact_cycle
+source_chain_id: chain_a
+destination_chain_id: chain_b
+source_oapp: oapp_a
+destination_oapp: oapp_b
+source_endpoint:
+  max_messages_per_batch: 32
+  packet_format_latency_ms:
+    deterministic_series:
+      - 0.42
+      - 0.36
+      - 0.32
+      - 0.28
+      - 0.27
+      - 0.29
+      - 0.26
+      - 0.28
+      - 0.27
+      - 0.30
+      - 0.34
+      - 0.28
+      - 0.27
+      - 0.29
+      - 0.26
+      - 0.28
+  source_send_cpu_percent:
+    deterministic_series:
+      - 56.0
+      - 60.0
+      - 64.0
+      - 67.0
+      - 69.0
+      - 71.0
+      - 72.0
+      - 72.0
+      - 71.0
+      - 70.0
+      - 70.0
+      - 69.0
+      - 68.0
+      - 67.0
+      - 66.0
+destination_endpoint:
+  lz_receive_execute_ms:
+    deterministic_series:
+      - 0.52
+      - 0.46
+      - 0.38
+      - 0.34
+      - 0.32
+      - 0.35
+      - 0.31
+      - 0.33
+      - 0.32
+      - 0.34
+      - 0.44
+      - 0.39
+      - 0.33
+      - 0.32
+      - 0.33
+      - 0.32
+  destination_execute_cpu_percent:
+    deterministic_series:
+      - 60.0
+      - 64.0
+      - 68.0
+      - 70.0
+      - 72.0
+      - 73.0
+      - 74.0
+      - 74.0
+      - 73.0
+      - 73.0
+      - 72.0
+      - 72.0
+      - 71.0
+      - 71.0
+      - 70.0
+message_lib:
+  packet_header_bytes: 96
+  commit_verification_latency_ms:
+    deterministic_series:
+      - 95.0
+      - 88.0
+      - 72.0
+      - 68.0
+      - 66.0
+      - 69.0
+      - 65.0
+      - 67.0
+      - 66.0
+      - 68.0
+      - 82.0
+      - 74.0
+      - 67.0
+      - 66.0
+      - 68.0
+      - 66.0
+dvn:
+  total_verifiers: 3
+  required_quorum: 2
+  verification_payload_bytes: 512
+  dvn_cpu_percent:
+    deterministic_series:
+      - 58.0
+      - 62.0
+      - 66.0
+      - 69.0
+      - 71.0
+      - 72.0
+      - 73.0
+      - 73.0
+      - 72.0
+      - 72.0
+      - 71.0
+      - 71.0
+      - 70.0
+      - 69.0
+      - 68.0
+  verifiers:
+    - verifier_id: dvn_alpha
+      verify_latency_ms:
+        deterministic_series:
+          - 168.0
+          - 156.0
+          - 148.0
+          - 146.0
+          - 150.0
+          - 147.0
+          - 151.0
+          - 148.0
+          - 152.0
+          - 146.0
+          - 160.0
+          - 150.0
+          - 148.0
+          - 147.0
+          - 149.0
+          - 147.0
+      network_rtt_ms:
+        deterministic_series:
+          - 72.0
+          - 68.0
+          - 58.0
+          - 56.0
+          - 60.0
+          - 58.0
+          - 62.0
+          - 59.0
+          - 61.0
+          - 58.0
+          - 66.0
+          - 60.0
+          - 62.0
+          - 58.0
+          - 56.0
+          - 60.0
+    - verifier_id: dvn_beta
+      verify_latency_ms:
+        deterministic_series:
+          - 178.0
+          - 166.0
+          - 158.0
+          - 156.0
+          - 160.0
+          - 157.0
+          - 161.0
+          - 158.0
+          - 162.0
+          - 156.0
+          - 170.0
+          - 160.0
+          - 158.0
+          - 157.0
+          - 159.0
+          - 157.0
+      network_rtt_ms:
+        deterministic_series:
+          - 78.0
+          - 72.0
+          - 62.0
+          - 60.0
+          - 64.0
+          - 62.0
+          - 66.0
+          - 63.0
+          - 65.0
+          - 62.0
+          - 70.0
+          - 64.0
+          - 66.0
+          - 62.0
+          - 60.0
+          - 64.0
+    - verifier_id: dvn_gamma
+      verify_latency_ms:
+        deterministic_series:
+          - 192.0
+          - 178.0
+          - 170.0
+          - 168.0
+          - 172.0
+          - 169.0
+          - 173.0
+          - 170.0
+          - 174.0
+          - 168.0
+          - 184.0
+          - 172.0
+          - 170.0
+          - 169.0
+          - 171.0
+          - 169.0
+      network_rtt_ms:
+        deterministic_series:
+          - 85.0
+          - 78.0
+          - 68.0
+          - 66.0
+          - 70.0
+          - 68.0
+          - 72.0
+          - 69.0
+          - 71.0
+          - 68.0
+          - 76.0
+          - 70.0
+          - 72.0
+          - 68.0
+          - 66.0
+          - 70.0
+energy:
+  k_cpu_nj_per_1k_cycles: 11538.4615
+  k_net_uj_per_kb: 300.0
+  k_dvn_verify_mj_per_vote: 0.012
+  k_commit_verification_mj: 0.008

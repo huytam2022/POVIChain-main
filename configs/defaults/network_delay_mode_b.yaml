@@ -1,0 +1,9 @@
+name: network_delay_mode_b
+description: "Calibrated IoT mesh network delay for Mode B Groth16 experiment"
+delay_series_ms:
+  - 140
+  - 145
+  - 150
+  - 155
+replay_mode: exact_cycle
+bandwidth_mbps: 100

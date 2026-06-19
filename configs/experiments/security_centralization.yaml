@@ -1,0 +1,16 @@
+experiment_id: security_centralization
+scenario: prover_reputation_centralization
+
+prover_count: 100
+
+without_mechanisms:
+  power_alpha: 1.7
+  description: "no rotation cap, no decay, no hardware-aware weighting"
+
+with_mechanisms:
+  power_alpha: 1.0
+  description: "rotation_cap + reputation_decay + hardware-aware reward weighting"
+
+
+output:
+  output_dir: outputs/security_centralization

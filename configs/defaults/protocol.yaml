@@ -1,0 +1,14 @@
+name: protocol_default
+committee_threshold_theta: 0.10
+reputation_weights:
+  alpha: 0.7
+  beta: 0.15
+  gamma: 0.10
+  lambda: 0.05
+  delta: 0.25
+  eta: 0.02
+  mu: 0.10
+  r_min: 0.05
+finalization_quorum_ratio: 0.6666666667
+min_committee_size: 1
+randao_prefix: RANDAO

@@ -1,0 +1,37 @@
+experiment_id: sybil_collusion
+scenario: sybil_collusion
+node_count: 100
+malicious_fractions:
+  - 0.10
+  - 0.25
+  - 0.40
+mode: A
+rounds_per_run: 240
+committee_threshold_theta: 5.5
+penalty_malicious_per_round: 0.22
+availability_delta: 0.012
+reputation_weights:
+  alpha: 0.7
+  beta: 0.15
+  gamma: 0.10
+  lambda: 0.25
+  delta: 0.25
+  eta: 0.02
+  mu: 0.15
+  r_min: 0.05
+adversary_profile:
+  enabled: true
+  sybil: true
+  collusion: true
+  sybil_identity_multiplier: 2
+  malicious_proposal_invalid: true
+  malicious_vote_policy: equivocate_or_reject
+  mal_initial_reputation_scale: 0.62
+  detection_probability: 0.19
+  network_wide_detection: true
+  continuous_availability: true
+output:
+  save_raw_metrics: true
+  save_aggregated_metrics: true
+  save_plot: true
+  output_dir: outputs/sybil_collusion

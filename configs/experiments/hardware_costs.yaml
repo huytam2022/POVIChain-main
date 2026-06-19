@@ -1,0 +1,20 @@
+experiment_id: hardware_costs
+scenario: zkp_costs_by_hardware
+
+replicates: 100
+
+mcu_verification:
+  median_ms: 125.0
+  amp_ms: 75.0
+
+rpi_prover:
+  - name: "Groth16"
+    median_s: 15.0
+    amp_s: 5.0
+  - name: "STARKs"
+    median_s: 50.0
+    amp_s: 10.0
+
+
+output:
+  output_dir: outputs/hardware_costs

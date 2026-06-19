@@ -1,0 +1,5 @@
+name: network_delay_standard
+description: "Uniform [100, 500] ms represented as deterministic quantile ladder"
+delay_series_ms: [100, 133, 166, 200, 233, 266, 300, 333, 366, 400, 433, 466, 500]
+replay_mode: exact_cycle
+bandwidth_mbps: 100
