@@ -5,7 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export PYTHONPATH="$ROOT_DIR/src"
 cd "$ROOT_DIR"
 
-py -m streamlit run src/dashboard/streamlit_app.py \
+py -m streamlit run src/demo/dashboard/streamlit_app.py \
     --server.port 8501 \
     --server.headless true \
     --browser.gatherUsageStats false \

@@ -26,7 +26,8 @@ if sys.stdout is not None and getattr(sys.stdout, "encoding", "").lower() != "ut
     except Exception:
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
-_REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# src/research/validation/fidelity.py -> repo root: leo 4 cấp
+_REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 
 def _pct(p, xs):

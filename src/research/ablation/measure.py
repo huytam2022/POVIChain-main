@@ -43,7 +43,8 @@ ABLATIONS = [
     ("No Smart Zones (Global)", "ablation_no_smart_zone"),
 ]
 
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# src/research/ablation/measure.py -> repo root cần leo 4 cấp (research/, src/ đều tính)
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 
 def _run_variant(base_doc, flag, workdir):

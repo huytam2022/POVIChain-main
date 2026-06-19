@@ -3,7 +3,7 @@ setlocal
 set PYTHONPATH=%~dp0src
 cd /d "%~dp0"
 
-py -m streamlit run src\dashboard\streamlit_app.py ^
+py -m streamlit run src\demo\dashboard\streamlit_app.py ^
     --server.port 8501 ^
     --server.headless true ^
     --browser.gatherUsageStats false ^

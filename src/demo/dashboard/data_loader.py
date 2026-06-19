@@ -8,7 +8,7 @@ import json
 import os
 from typing import Any, Dict, List, Optional
 
-ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", ".."))
+ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 OUTPUTS_DIR = os.path.join(ROOT, "outputs")
 CONFIGS_DIR = os.path.join(ROOT, "configs")
 

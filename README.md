@@ -10,6 +10,20 @@ hướng dấu vết tất định để so sánh giao thức, và một dashboa
 chuẩn từ phần cứng thật (Raspberry Pi 4 và ESP32-S3). Toàn bộ mô phỏng là tất
 định: chạy lại cho cùng một kết quả.
 
+## Tổ chức mã nguồn
+
+Mã nguồn trong `src/` được tách thành ba tầng rõ ràng:
+
+- **`src/povichain/`** — thư viện lõi giao thức (đồng thuận PoVI, mật mã, định
+  tuyến, thiết bị, mô phỏng, báo cáo). Mọi thành phần khác đều phụ thuộc vào đây.
+- **`src/research/`** — mã thực nghiệm nghiên cứu: hai baseline (relay/oracle) và
+  các runner đánh giá theo bốn câu hỏi nghiên cứu (RQ1–RQ4) cùng đối chiếu fidelity.
+- **`src/demo/`** — mã demo (dashboard Streamlit minh hoạ đa vai trò).
+
+Dự án chạy theo kiểu thêm `src/` vào đường dẫn (không cần cài đặt gói). Các điểm
+vào ở thư mục gốc (`run*.py`, `run_dashboard.*`) đã tự thêm `src/` vào `sys.path`;
+khi gọi trực tiếp bằng `python -m` thì đặt `PYTHONPATH=src`.
+
 ## Yêu cầu
 
 - Python 3.10 trở lên
@@ -29,13 +43,21 @@ Kết quả ghi vào `outputs/<experiment_id>/` (gồm `*_summary.json`,
 `aggregated_metrics.json`, `raw_metrics.json`). Có thể chỉ định nơi ghi bằng
 `--output-dir`.
 
-Dùng trực tiếp trong Python:
+Dùng trực tiếp trong Python (cần có `src/` trên đường dẫn, ví dụ
+`PYTHONPATH=src`):
 
 ```python
 from povichain.simulation.runner import Runner
 
 runner = Runner(configs_root="configs", schemas_root="schemas", data_root="data")
 result = runner.run_manifest("configs/experiments/main_comparison_mode_b.yaml")
+```
+
+Chạy riêng hai baseline để so sánh:
+
+```bash
+python run_relay_protocol.py --config configs/experiments/relay_protocol_comparison.yaml
+PYTHONPATH=src python -m research.oracle_protocol --config configs/experiments/oracle_protocol_comparison.yaml
 ```
 
 Một số manifest theo bốn câu hỏi nghiên cứu:
@@ -61,15 +83,17 @@ vào `outputs/rq4_ablations/measured_{ablations.csv, summary.json, summary.md}`.
 
 ## Đối chiếu mô phỏng vs số đo phần cứng
 
-Kiểm chứng độ trung thực: bộ mô phỏng tái tạo số đo benchmark thật trên
-Raspberry Pi 4 và ESP32-S3 (độ trễ tạo bằng chứng/xác minh, CPU, bộ nhớ) trong
-khoảng tin cậy 95%.
+Kiểm tra nhất quán nội tại: xác nhận bộ mô phỏng tái tạo **trung thực** các số đo
+benchmark đã hiệu chuẩn trên Raspberry Pi 4 và ESP32-S3 (độ trễ tạo bằng
+chứng/xác minh, CPU, bộ nhớ) — mọi giá trị nằm trong khoảng tin cậy 95% của số
+đo. Đây là sanity check cho cơ chế phát-lại tất định (không phải xác thực mô
+hình độc lập trên testbed mới).
 
 ```bash
 python run_validation.py
 ```
 
-Kết quả ghi vào `outputs/validation/fidelity_table.{csv,md}` (sai số tương đối
+Kết quả ghi vào `outputs/validation/fidelity_table.{csv,md}` (độ lệch tương đối
 lớn nhất ~1.6%).
 
 ## Kiểm thử
@@ -82,7 +106,7 @@ pytest -q
 
 ```bash
 pip install -r requirements_dashboard.txt
-python -m streamlit run src/dashboard/streamlit_app.py
+python -m streamlit run src/demo/dashboard/streamlit_app.py
 ```
 
 Hoặc dùng script khởi chạy: `run_dashboard.bat` (Windows) /
@@ -95,15 +119,18 @@ trên năm loại chứng chỉ).
 
 ```
 src/
-  povichain/        Lõi giao thức: đồng thuận, mật mã, định tuyến, thiết bị, mô phỏng, báo cáo
-  relay_protocol/   Bộ mô phỏng baseline kiểu relay
-  oracle_protocol/  Bộ mô phỏng baseline kiểu oracle
-  dashboard/        Giao diện Streamlit (kiosk, vai trò, trình xem dấu vết)
-  resilience/       Runner và sinh biểu đồ cho thí nghiệm bền vững
-  performance/      Runner và sinh biểu đồ cho thí nghiệm hiệu năng
-  resource_usage/   Runner và sinh biểu đồ cho tài nguyên thiết bị
-  ablation/         Ablation đo thật (measure.py) và sinh biểu đồ
-  security_analysis/ Phân tích an ninh - kinh tế (ECoC, tập trung hoá)
+  povichain/          Lõi giao thức: đồng thuận, mật mã, định tuyến, thiết bị, mô phỏng, báo cáo
+  research/           Mã thực nghiệm nghiên cứu (baselines + đánh giá RQ1–RQ4)
+    relay_protocol/   Bộ mô phỏng baseline kiểu relay (IBC-like)
+    oracle_protocol/  Bộ mô phỏng baseline kiểu oracle (LayerZero-like)
+    resilience/       Runner + sinh biểu đồ thí nghiệm bền vững (RQ1)
+    performance/      Runner + sinh biểu đồ thí nghiệm hiệu năng (RQ2)
+    resource_usage/   Runner + sinh biểu đồ tài nguyên thiết bị (RQ3)
+    ablation/         Ablation đo thật (measure.py) + sinh biểu đồ (RQ4)
+    security_analysis/ Phân tích an ninh - kinh tế (ECoC, tập trung hoá)
+    validation/       Đối chiếu fidelity bộ mô phỏng (run_validation.py)
+  demo/               Mã demo
+    dashboard/        Giao diện Streamlit (kiosk, vai trò, trình xem dấu vết)
 
 configs/
   defaults/         Hồ sơ mạng, thiết bị, năng lượng, workload

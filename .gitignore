@@ -35,6 +35,7 @@ _tamdump.txt
 _thesisdump.txt
 *.pptx
 Script thuyet trinh.md
+QnA_phong_ve_KLTN.md
 build_slides.py
 build_slides_v2.py
 add_notes.py

@@ -3,22 +3,22 @@ import os
 
 import pytest
 
-from oracle_protocol.channel_state import OracleChannelState
-from oracle_protocol.dvn import OracleVerifierNetwork, OracleVerifier
-from oracle_protocol.endpoint import OracleDestinationEndpoint, OracleEndpoint, OracleSourceEndpoint
-from oracle_protocol.executor import OracleExecutor
-from oracle_protocol.lifecycle import OraclePacketLifecycle
-from oracle_protocol.manifest import load_oracle_manifest
-from oracle_protocol.message import OracleMessage, OracleAttestation
-from oracle_protocol.message_lib import OracleMessageLib
-from oracle_protocol.metrics_collector import OracleMetricsCollector
-from oracle_protocol.nonce_manager import OracleNonceManager
-from oracle_protocol.protocol_profile import (
+from research.oracle_protocol.channel_state import OracleChannelState
+from research.oracle_protocol.dvn import OracleVerifierNetwork, OracleVerifier
+from research.oracle_protocol.endpoint import OracleDestinationEndpoint, OracleEndpoint, OracleSourceEndpoint
+from research.oracle_protocol.executor import OracleExecutor
+from research.oracle_protocol.lifecycle import OraclePacketLifecycle
+from research.oracle_protocol.manifest import load_oracle_manifest
+from research.oracle_protocol.message import OracleMessage, OracleAttestation
+from research.oracle_protocol.message_lib import OracleMessageLib
+from research.oracle_protocol.metrics_collector import OracleMetricsCollector
+from research.oracle_protocol.nonce_manager import OracleNonceManager
+from research.oracle_protocol.protocol_profile import (
     build_verifier_replays,
     build_replays,
     load_oracle_protocol_profile,
 )
-from oracle_protocol.runner import OracleRunner
+from research.oracle_protocol.runner import OracleRunner
 from povichain.ingestion.trace_loader import ExactCycleReplay
 
 
@@ -331,7 +331,7 @@ def test_removing_dvn_fanout_breaks_oracle_fanout():
     )
     manifest = load_oracle_manifest(MANIFEST_PATH)
     from dataclasses import replace
-    from oracle_protocol.manifest import OracleQuorumOverride
+    from research.oracle_protocol.manifest import OracleQuorumOverride
 
     single_manifest = replace(
         manifest,
