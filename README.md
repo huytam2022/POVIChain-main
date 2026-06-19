@@ -1,35 +1,57 @@
-# Kiến trúc liên thông liên chuỗi nhẹ cho mạng biên dị thể
+# PoVIChain — Lightweight Verifiable Cross-Chain Interoperability for Heterogeneous Edge Networks
 
-Nguyên mẫu nghiên cứu cho khả năng liên thông liên chuỗi (cross-chain
-interoperability) nhẹ và xác minh được, dành cho dịch vụ IoT trong thành phố
-thông minh. Hệ thống gồm phần lõi giao thức (đồng thuận dựa trên tương tác đã
-xác minh, điều phối Smart Zone, xác minh lai MCU/gateway), một bộ mô phỏng
-hướng dấu vết tất định để so sánh giao thức, và một dashboard minh hoạ đa vai trò.
+A research prototype for **lightweight, verifiable cross-chain interoperability**
+targeting IoT services in smart cities. The system combines a protocol core
+(Proof-of-Verified-Interaction consensus, Smart Zone dispatching, hybrid
+MCU/gateway verification), a deterministic trace-driven simulator for fair
+protocol comparison, and a multi-role demonstration dashboard.
 
-Đánh giá dùng phương pháp mô phỏng hướng dấu vết với độ trễ mật mã được hiệu
-chuẩn từ phần cứng thật (Raspberry Pi 4 và ESP32-S3). Toàn bộ mô phỏng là tất
-định: chạy lại cho cùng một kết quả.
+Evaluation uses **trace-driven simulation with hardware-calibrated emulation**:
+cryptographic latencies are measured on real hardware (Raspberry Pi 4 and
+ESP32-S3) and injected into the simulator. The simulation is fully
+**deterministic** — re-running yields identical results.
 
-## Yêu cầu
+> Associated publication: T.-D. Tran, T. Truong Ha Huy, V.-H. Pham,
+> *"PoVIChain: Lightweight and verifiable cross-chain interoperability for
+> heterogeneous edge networks,"* **Internet of Things** (Elsevier), vol. 37,
+> art. 101917, 2026. DOI: 10.1016/j.iot.2026.101917.
 
-- Python 3.10 trở lên
-- `pyyaml` cho phần lõi mô phỏng (đọc manifest/cấu hình)
-- Phần demo: `pip install -r requirements_dashboard.txt`
+## Code organization
 
-## Chạy một thí nghiệm
+The `src/` tree is split into three clear layers:
 
-Mỗi thí nghiệm được mô tả bằng một manifest YAML trong `configs/experiments/`.
-Chạy qua điểm vào dòng lệnh:
+- **`src/povichain/`** — the protocol core library (PoVI consensus, cryptography,
+  routing, devices, simulation, reporting). Everything else depends on it.
+- **`src/research/`** — research/experiment code: the two baselines
+  (relay / oracle) and the evaluation runners for the four research questions
+  (RQ1–RQ4) plus the fidelity check.
+- **`src/demo/`** — demonstration code (a multi-role Streamlit dashboard).
+
+The project runs by placing `src/` on the import path (no package installation
+required). The root entry points (`run*.py`, `run_dashboard.*`) add `src/` to
+`sys.path` automatically; when invoking modules directly with `python -m`, set
+`PYTHONPATH=src`.
+
+## Requirements
+
+- Python 3.10+
+- `pyyaml` for the simulation core (manifest/config parsing)
+- Demo only: `pip install -r requirements_dashboard.txt`
+
+## Running an experiment
+
+Each experiment is described by a YAML manifest under `configs/experiments/`.
+Run it through the command-line entry point:
 
 ```bash
 python run.py --config configs/experiments/main_comparison_mode_b.yaml
 ```
 
-Kết quả ghi vào `outputs/<experiment_id>/` (gồm `*_summary.json`,
-`aggregated_metrics.json`, `raw_metrics.json`). Có thể chỉ định nơi ghi bằng
+Results are written to `outputs/<experiment_id>/` (`*_summary.json`,
+`aggregated_metrics.json`, `raw_metrics.json`). Override the destination with
 `--output-dir`.
 
-Dùng trực tiếp trong Python:
+Use it directly from Python (requires `src/` on the path, e.g. `PYTHONPATH=src`):
 
 ```python
 from povichain.simulation.runner import Runner
@@ -38,41 +60,52 @@ runner = Runner(configs_root="configs", schemas_root="schemas", data_root="data"
 result = runner.run_manifest("configs/experiments/main_comparison_mode_b.yaml")
 ```
 
-Một số manifest theo bốn câu hỏi nghiên cứu:
+Selected manifests map to the four research questions:
 
-- `rq1_sybil_collusion.yaml`, `rq1_network_partitions.yaml` — an ninh đối kháng
-- `rq2_multidomain_load.yaml`, `rq2_stress_epochs.yaml` — mở rộng đa miền
-- `rq3_end_device.yaml`, `rq3_gateway_profile.yaml` — hiệu quả trên thiết bị IoT
-- `main_comparison_mode_b.yaml` — so sánh với baseline IBC-like / LayerZero-like
+- `rq1_sybil_collusion.yaml`, `rq1_network_partitions.yaml` — adversarial robustness
+- `rq2_multidomain_load.yaml`, `rq2_stress_epochs.yaml` — multi-domain scalability
+- `rq3_end_device.yaml`, `rq3_gateway_profile.yaml` — efficiency on IoT devices
+- `main_comparison_mode_b.yaml` — comparison against IBC-like / LayerZero-like baselines
 
-## Ablation (đo thật)
+Run the two baselines for comparison:
 
-Phân tích vai trò từng thành phần bằng cách **tắt lần lượt** mỗi trụ cột kiến
-trúc rồi **đo trực tiếp** thông lượng / độ trễ / năng lượng từ mô phỏng (không
-phải áp hệ số ước lượng):
+```bash
+python run_relay_protocol.py --config configs/experiments/relay_protocol_comparison.yaml
+PYTHONPATH=src python -m research.oracle_protocol --config configs/experiments/oracle_protocol_comparison.yaml
+```
+
+## Ablation (directly measured)
+
+Quantify the contribution of each architectural pillar by **disabling one at a
+time** and **directly measuring** throughput / latency / energy from the
+simulator (not applying estimated factors):
 
 ```bash
 python run_ablation.py
 ```
 
-Bốn biến thể: bỏ trọng số danh tiếng, đồng thuận toàn mạng (bỏ ủy ban VRF),
-đồng thuận Full-ZKP (bỏ xác minh lai), và bỏ điều phối Smart Zone. Kết quả ghi
-vào `outputs/rq4_ablations/measured_{ablations.csv, summary.json, summary.md}`.
+Four variants: no reputation weighting, network-wide consensus (no VRF
+committee), Full-ZKP consensus (no hybrid verification), and no Smart Zone
+dispatching. Results are written to
+`outputs/rq4_ablations/measured_{ablations.csv, summary.json, summary.md}`.
 
-## Đối chiếu mô phỏng vs số đo phần cứng
+## Simulation vs. hardware fidelity check
 
-Kiểm chứng độ trung thực: bộ mô phỏng tái tạo số đo benchmark thật trên
-Raspberry Pi 4 và ESP32-S3 (độ trễ tạo bằng chứng/xác minh, CPU, bộ nhớ) trong
-khoảng tin cậy 95%.
+An internal consistency check: it confirms the simulator faithfully reproduces
+the calibrated benchmark values measured on Raspberry Pi 4 and ESP32-S3
+(proof-generation / verification latency, CPU, memory) — every value falls
+within the 95% confidence interval of the measurement. This is a sanity check
+of the deterministic replay mechanism, not an independent model validation
+against a new testbed.
 
 ```bash
 python run_validation.py
 ```
 
-Kết quả ghi vào `outputs/validation/fidelity_table.{csv,md}` (sai số tương đối
-lớn nhất ~1.6%).
+Results are written to `outputs/validation/fidelity_table.{csv,md}` (maximum
+relative deviation ~1.6%).
 
-## Kiểm thử
+## Tests
 
 ```bash
 pytest -q
@@ -82,45 +115,49 @@ pytest -q
 
 ```bash
 pip install -r requirements_dashboard.txt
-python -m streamlit run src/dashboard/streamlit_app.py
+python -m streamlit run src/demo/dashboard/streamlit_app.py
 ```
 
-Hoặc dùng script khởi chạy: `run_dashboard.bat` (Windows) /
-`bash run_dashboard.sh` (Linux/macOS). Demo gồm ba vai trò: người dân (trạm sạc
-xe điện, hoá đơn nước, đo điện mặt trời), quản trị (theo dõi epoch, bảng điều
-khiển validator, sức khoẻ mạng), và thanh tra (xác minh danh tính không tiết lộ
-trên năm loại chứng chỉ).
+Or use the launch scripts: `run_dashboard.bat` (Windows) /
+`bash run_dashboard.sh` (Linux/macOS). The demo presents three roles: a citizen
+(EV charging station, water bill, solar metering), an administrator (epoch
+monitoring, validator dashboard, network health), and an inspector
+(zero-knowledge identity verification across five credential types).
 
-## Cấu trúc thư mục
+## Directory structure
 
 ```
 src/
-  povichain/        Lõi giao thức: đồng thuận, mật mã, định tuyến, thiết bị, mô phỏng, báo cáo
-  relay_protocol/   Bộ mô phỏng baseline kiểu relay
-  oracle_protocol/  Bộ mô phỏng baseline kiểu oracle
-  dashboard/        Giao diện Streamlit (kiosk, vai trò, trình xem dấu vết)
-  resilience/       Runner và sinh biểu đồ cho thí nghiệm bền vững
-  performance/      Runner và sinh biểu đồ cho thí nghiệm hiệu năng
-  resource_usage/   Runner và sinh biểu đồ cho tài nguyên thiết bị
-  ablation/         Ablation đo thật (measure.py) và sinh biểu đồ
-  security_analysis/ Phân tích an ninh - kinh tế (ECoC, tập trung hoá)
+  povichain/          Protocol core: consensus, crypto, routing, devices, simulation, reporting
+  research/           Research/experiment code (baselines + RQ1–RQ4 evaluation)
+    relay_protocol/   IBC-like relay baseline simulator
+    oracle_protocol/  LayerZero-like oracle baseline simulator
+    resilience/       Runner + plots for robustness experiments (RQ1)
+    performance/      Runner + plots for performance experiments (RQ2)
+    resource_usage/   Runner + plots for device resource usage (RQ3)
+    ablation/         Directly-measured ablation (measure.py) + plots (RQ4)
+    security_analysis/ Security-economics analysis (ECoC, centralization)
+    validation/       Simulator fidelity check (run_validation.py)
+  demo/               Demonstration code
+    dashboard/        Streamlit interface (kiosk, roles, trace viewer)
 
 configs/
-  defaults/         Hồ sơ mạng, thiết bị, năng lượng, workload
-  experiments/      Manifest thí nghiệm (Mode A / B và các kịch bản)
-  profiles/         Hồ sơ giao thức tổng hợp
+  defaults/           Network, device, energy, and workload profiles
+  experiments/        Experiment manifests (Mode A / B and scenarios)
+  profiles/           Aggregated protocol profiles
 
-data/               Chuỗi đo lường đầu vào và artefact bootstrap đúng schema
-schemas/            JSON Schema cho manifest và dữ liệu hiệu chuẩn
-outputs/            Kết quả thí nghiệm
-tests/              Bộ kiểm thử pytest
+data/                 Input measurement series and schema-compliant bootstrap artifacts
+schemas/              JSON Schemas for manifests and calibration data
+outputs/              Experiment results
+tests/                pytest suite
 ```
 
-## Ghi chú tái lập
+## Reproducibility notes
 
-Logic giao thức tách biệt khỏi dữ liệu đo thiết bị: độ trễ mật mã và mức tiêu
-thụ tài nguyên được hiệu chuẩn ngoại tuyến rồi tiêm vào bộ mô phỏng qua các điểm
-tiêm chuẩn hoá theo schema. Năng lượng mỗi giao dịch là giá trị hiệu chuẩn ở mức
-giao thức (xem `configs/experiments/end_device.yaml`), nhất quán giữa các thí
-nghiệm. Nhờ tách biệt này, người đọc tái lập được kết quả khi cung cấp tệp hiệu
-chuẩn thiết bị đúng schema.
+Protocol logic is decoupled from device measurement data: cryptographic
+latencies and resource usage are calibrated offline and injected into the
+simulator through schema-standardized injection points. Per-transaction energy
+is a protocol-level calibrated value (see
+`configs/experiments/end_device.yaml`), consistent across experiments. Thanks to
+this separation, results are reproducible once a schema-compliant device
+calibration file is provided.

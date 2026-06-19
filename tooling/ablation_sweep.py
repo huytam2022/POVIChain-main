@@ -15,7 +15,7 @@ if getattr(sys.stdout, "encoding", "").lower() != "utf-8":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 import yaml
-from ablation.measure import measure
+from research.ablation.measure import measure
 
 _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = os.path.join(_ROOT, "configs", "experiments", "rq4_ablation_base.yaml")

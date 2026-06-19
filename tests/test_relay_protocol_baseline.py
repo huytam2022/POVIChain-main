@@ -3,17 +3,17 @@ import os
 
 import pytest
 
-from relay_protocol.destination_chain import RelayDestinationChain
-from relay_protocol.light_client import RelayLightClient
-from relay_protocol.manifest import load_relay_manifest
-from relay_protocol.merkle_verifier import RelayMerkleVerifier
-from relay_protocol.metrics_collector import RelayMetricsCollector
-from relay_protocol.packet import RelayPacket
-from relay_protocol.packet_lifecycle import RelayPacketLifecycle
-from relay_protocol.protocol_profile import build_replays, load_relay_protocol_profile
-from relay_protocol.relayer import RelayAgent
-from relay_protocol.runner import RelayRunner
-from relay_protocol.source_chain import RelaySourceChain
+from research.relay_protocol.destination_chain import RelayDestinationChain
+from research.relay_protocol.light_client import RelayLightClient
+from research.relay_protocol.manifest import load_relay_manifest
+from research.relay_protocol.merkle_verifier import RelayMerkleVerifier
+from research.relay_protocol.metrics_collector import RelayMetricsCollector
+from research.relay_protocol.packet import RelayPacket
+from research.relay_protocol.packet_lifecycle import RelayPacketLifecycle
+from research.relay_protocol.protocol_profile import build_replays, load_relay_protocol_profile
+from research.relay_protocol.relayer import RelayAgent
+from research.relay_protocol.runner import RelayRunner
+from research.relay_protocol.source_chain import RelaySourceChain
 
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))

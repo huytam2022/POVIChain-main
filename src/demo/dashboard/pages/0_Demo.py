@@ -11,16 +11,16 @@ from datetime import date
 import streamlit as st
 import streamlit.components.v1 as components
 
-from dashboard.kiosk_stage import (
+from demo.dashboard.kiosk_stage import (
     ChargeSession, WaterSession, ServiceSession, SolarSession,
     render_kiosk_html, render_water_html, render_service_html, render_solar_html,
     SERVICE_CFG,
 )
-from dashboard.roles_stage import (
+from demo.dashboard.roles_stage import (
     render_admin_html, render_privacy_html, render_subject_html,
     VERIFY_TYPES, verify, authenticate,
 )
-from dashboard.theme import inject_cinematic
+from demo.dashboard.theme import inject_cinematic
 
 st.set_page_config(page_title="Smart City · Dịch vụ liên chuỗi", page_icon="⚡",
                    layout="wide", initial_sidebar_state="collapsed")
